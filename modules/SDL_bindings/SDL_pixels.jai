@@ -191,6 +191,7 @@ SDL_DEFINE_PIXELFORMAT :: (type: u32, order: u32, layout: u32, bits: u32, bytes:
 }
 
 SDL_PixelFormatEnum :: enum u32 {
+    SDL_PIXELFORMAT_UNKNOWN;
     SDL_PIXELFORMAT_INDEX1LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_4321, 0, 1, 0);
     SDL_PIXELFORMAT_INDEX1MSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_1234, 0, 1, 0);
     SDL_PIXELFORMAT_INDEX4LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX4, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_4321, 0, 4, 0);
@@ -420,4 +421,4 @@ test_pixels_module :: () {
     test_pixels_ispixelformat_fourcc();
 }
 
-//#run test_pixels_module();
+#run test_pixels_module();
