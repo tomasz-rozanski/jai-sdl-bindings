@@ -421,4 +421,4 @@ test_pixels_module :: () {
     test_pixels_ispixelformat_fourcc();
 }
 
-#run test_pixels_module();
+//#run test_pixels_module();

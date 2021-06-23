@@ -97,6 +97,6 @@ ed.bat
 .build/
 output.dot
 *.exe
-test.jai
+test*.jai
 
 
