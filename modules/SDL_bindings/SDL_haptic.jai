@@ -544,5 +544,5 @@ test_haptic_module :: () {
     test_haptic_stuff();
 }
 
-#run test_haptic_module();
+//#run test_haptic_module();
 

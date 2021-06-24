@@ -1,13 +1,14 @@
 #import "SDL";
 #import "Basic";
 
+#load "SDL_audio.jai";
+#load "SDL_error.jai";
 #load "SDL_haptic.jai";
 #load "SDL_pixels.jai";
 #load "SDL_stdinc.jai";
 #load "SDL_surface.jai";
 
 #module_parameters(LITTLE_ENDIAN := true);
-
 
 // Some utility stuff for testing. Please ignore
 
@@ -22,4 +23,3 @@ GREEN :: "\e[32m";
 YELLOW :: "\e[93m";
 CYAN :: "\e[36m";
 NORMAL :: "\e[0m";
-

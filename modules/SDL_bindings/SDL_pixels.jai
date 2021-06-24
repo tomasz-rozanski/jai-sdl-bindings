@@ -16,7 +16,7 @@ SDL_ALPHA_OPAQUE      :: 255;
 SDL_ALPHA_TRANSPARENT :: 0;
 
 // Pixel type
-SDL_PixelType :: enum u32 {
+using SDL_PixelType :: enum u32 {
     SDL_PIXELTYPE_UNKNOWN  :: 0;
     SDL_PIXELTYPE_INDEX1   :: 1;
     SDL_PIXELTYPE_INDEX4   :: 2;
@@ -32,14 +32,14 @@ SDL_PixelType :: enum u32 {
 }
 
 // Bitmap pixel order, high bit -> low bit
-SDL_BitmapOrder :: enum u32 {
+using SDL_BitmapOrder :: enum u32 {
     SDL_BITMAPORDER_NONE :: 0;
     SDL_BITMAPORDER_4321 :: 1;
     SDL_BITMAPORDER_1234 :: 2;
 }
 
 // Packed component order, high bit -> low bit
-SDL_PackedOrder :: enum u32 {
+using SDL_PackedOrder :: enum u32 {
     SDL_PACKEDORDER_NONE :: 0;
     SDL_PACKEDORDER_XRGB :: 1;
     SDL_PACKEDORDER_RGBX :: 2;
@@ -52,7 +52,7 @@ SDL_PackedOrder :: enum u32 {
 }
 
 // Array component order, low byte -> high byte
-SDL_ArrayOrder :: enum u32 {
+using SDL_ArrayOrder :: enum u32 {
     SDL_ARRAYORDER_NONE :: 0;
     SDL_ARRAYORDER_RGB  :: 1;
     SDL_ARRAYORDER_RGBA :: 2;
@@ -63,7 +63,7 @@ SDL_ArrayOrder :: enum u32 {
 } 
 
 // Packed component layout
-SDL_PackedLayout :: enum u32 {
+using SDL_PackedLayout :: enum u32 {
     SDL_PACKEDLAYOUT_NONE    :: 0;
     SDL_PACKEDLAYOUT_332     :: 1;
     SDL_PACKEDLAYOUT_4444    :: 2;
@@ -107,8 +107,6 @@ SDL_BITSPERPIXEL :: (x: u32) -> u32{
 }
 
 SDL_BYTESPERPIXEL :: (x: u32) -> u32{
-    using SDL_PixelFormatEnum;
-
     result: u32;
     is_fourcc := SDL_ISPIXELFORMAT_FOURCC(x);
 
@@ -127,9 +125,6 @@ SDL_BYTESPERPIXEL :: (x: u32) -> u32{
 }
 
 SDL_ISPIXELFORMAT_INDEXED :: (format: u32) -> bool {
-    using SDL_PixelFormatEnum;
-    using SDL_PixelType;
-
     result := (!SDL_ISPIXELFORMAT_FOURCC(format) && 
     ((SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_INDEX1) || 
     (SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_INDEX4) ||
@@ -139,8 +134,6 @@ SDL_ISPIXELFORMAT_INDEXED :: (format: u32) -> bool {
 }
 
 SDL_ISPIXELFORMAT_PACKED :: (format: u32) -> bool {
-    using SDL_PixelType;
-
     result := (!SDL_ISPIXELFORMAT_FOURCC(format) && 
     ((SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_PACKED8) || 
     (SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_PACKED16) || 
@@ -150,8 +143,6 @@ SDL_ISPIXELFORMAT_PACKED :: (format: u32) -> bool {
 }
 
 SDL_ISPIXELFORMAT_ARRAY :: (format: u32) -> bool {
-    using SDL_PixelType;
-
     result := (!SDL_ISPIXELFORMAT_FOURCC(format) && 
     ((SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_ARRAYU8) || 
     (SDL_PIXELTYPE(format) == cast(u32) SDL_PIXELTYPE_ARRAYU16) ||
@@ -163,9 +154,6 @@ SDL_ISPIXELFORMAT_ARRAY :: (format: u32) -> bool {
 }
 
 SDL_ISPIXELFORMAT_ALPHA :: (format: u32) -> bool {
-    using SDL_PackedOrder;
-    using SDL_ArrayOrder;
-
     result := ((SDL_ISPIXELFORMAT_PACKED(format) &&
     ((SDL_PIXELORDER(format) == cast(u32) SDL_PACKEDORDER_ARGB) ||
     (SDL_PIXELORDER(format) == cast(u32) SDL_PACKEDORDER_RGBA) ||
@@ -190,45 +178,45 @@ SDL_DEFINE_PIXELFORMAT :: (type: u32, order: u32, layout: u32, bits: u32, bytes:
     return cast(u32) ((1 << 28) | (type << 24) | (order << 20) | (layout << 16) | (bits << 8) | (bytes << 0));
 }
 
-SDL_PixelFormatEnum :: enum u32 {
+using SDL_PixelFormatEnum :: enum u32 {
     SDL_PIXELFORMAT_UNKNOWN;
-    SDL_PIXELFORMAT_INDEX1LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_4321, 0, 1, 0);
-    SDL_PIXELFORMAT_INDEX1MSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_1234, 0, 1, 0);
-    SDL_PIXELFORMAT_INDEX4LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX4, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_4321, 0, 4, 0);
-    SDL_PIXELFORMAT_INDEX4MSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX4, cast(u32) SDL_BitmapOrder.SDL_BITMAPORDER_1234, 0, 4, 0);
-    SDL_PIXELFORMAT_INDEX8 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_INDEX8, 0, 0, 8, 1);
-    SDL_PIXELFORMAT_RGB332 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED8, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XRGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_332, 8, 1);
-    SDL_PIXELFORMAT_XRGB4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XRGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 12, 2);
+    SDL_PIXELFORMAT_INDEX1LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BITMAPORDER_4321, 0, 1, 0);
+    SDL_PIXELFORMAT_INDEX1MSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_INDEX1, cast(u32) SDL_BITMAPORDER_1234, 0, 1, 0);
+    SDL_PIXELFORMAT_INDEX4LSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_INDEX4, cast(u32) SDL_BITMAPORDER_4321, 0, 4, 0);
+    SDL_PIXELFORMAT_INDEX4MSB :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_INDEX4, cast(u32) SDL_BITMAPORDER_1234, 0, 4, 0);
+    SDL_PIXELFORMAT_INDEX8 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_INDEX8, 0, 0, 8, 1);
+    SDL_PIXELFORMAT_RGB332 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED8, cast(u32) SDL_PACKEDORDER_XRGB, cast(u32) SDL_PACKEDLAYOUT_332, 8, 1);
+    SDL_PIXELFORMAT_XRGB4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XRGB, cast(u32) SDL_PACKEDLAYOUT_4444, 12, 2);
     SDL_PIXELFORMAT_RGB444 :: SDL_PIXELFORMAT_XRGB4444;
-    SDL_PIXELFORMAT_XBGR4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XBGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 12, 2);
+    SDL_PIXELFORMAT_XBGR4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XBGR, cast(u32) SDL_PACKEDLAYOUT_4444, 12, 2);
     SDL_PIXELFORMAT_BGR444 :: SDL_PIXELFORMAT_XBGR4444;
-    SDL_PIXELFORMAT_XRGB1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XRGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_1555, 15, 2);
+    SDL_PIXELFORMAT_XRGB1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XRGB, cast(u32) SDL_PACKEDLAYOUT_1555, 15, 2);
     SDL_PIXELFORMAT_RGB555 :: SDL_PIXELFORMAT_XRGB1555;
-    SDL_PIXELFORMAT_XBGR1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XBGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_1555, 15, 2);
+    SDL_PIXELFORMAT_XBGR1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XBGR, cast(u32) SDL_PACKEDLAYOUT_1555, 15, 2);
     SDL_PIXELFORMAT_BGR555 :: SDL_PIXELFORMAT_XBGR1555;
-    SDL_PIXELFORMAT_ARGB4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ARGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 16, 2);
-    SDL_PIXELFORMAT_RGBA4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_RGBA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 16, 2);
-    SDL_PIXELFORMAT_ABGR4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ABGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 16, 2);
-    SDL_PIXELFORMAT_BGRA4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_BGRA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_4444, 16, 2);
-    SDL_PIXELFORMAT_ARGB1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ARGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_1555, 16, 2);
-    SDL_PIXELFORMAT_RGBA5551 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_RGBA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_5551, 16, 2);
-    SDL_PIXELFORMAT_ABGR1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ABGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_1555, 16, 2);
-    SDL_PIXELFORMAT_BGRA5551 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_BGRA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_5551, 16, 2);
-    SDL_PIXELFORMAT_RGB565 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XRGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_565, 16, 2);
-    SDL_PIXELFORMAT_BGR565 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XBGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_565, 16, 2);
-    SDL_PIXELFORMAT_RGB24 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_ARRAYU8, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_RGB, 0, 24, 3);
-    SDL_PIXELFORMAT_BGR24 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_ARRAYU8, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_BGR, 0, 24, 3);
-    SDL_PIXELFORMAT_XRGB8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XRGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 24, 4);
+    SDL_PIXELFORMAT_ARGB4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_ARGB, cast(u32) SDL_PACKEDLAYOUT_4444, 16, 2);
+    SDL_PIXELFORMAT_RGBA4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_RGBA, cast(u32) SDL_PACKEDLAYOUT_4444, 16, 2);
+    SDL_PIXELFORMAT_ABGR4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_ABGR, cast(u32) SDL_PACKEDLAYOUT_4444, 16, 2);
+    SDL_PIXELFORMAT_BGRA4444 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_BGRA, cast(u32) SDL_PACKEDLAYOUT_4444, 16, 2);
+    SDL_PIXELFORMAT_ARGB1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_ARGB, cast(u32) SDL_PACKEDLAYOUT_1555, 16, 2);
+    SDL_PIXELFORMAT_RGBA5551 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_RGBA, cast(u32) SDL_PACKEDLAYOUT_5551, 16, 2);
+    SDL_PIXELFORMAT_ABGR1555 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_ABGR, cast(u32) SDL_PACKEDLAYOUT_1555, 16, 2);
+    SDL_PIXELFORMAT_BGRA5551 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_BGRA, cast(u32) SDL_PACKEDLAYOUT_5551, 16, 2);
+    SDL_PIXELFORMAT_RGB565 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XRGB, cast(u32) SDL_PACKEDLAYOUT_565, 16, 2);
+    SDL_PIXELFORMAT_BGR565 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED16, cast(u32) SDL_PACKEDORDER_XBGR, cast(u32) SDL_PACKEDLAYOUT_565, 16, 2);
+    SDL_PIXELFORMAT_RGB24 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_ARRAYU8, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_RGB, 0, 24, 3);
+    SDL_PIXELFORMAT_BGR24 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_ARRAYU8, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_BGR, 0, 24, 3);
+    SDL_PIXELFORMAT_XRGB8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_XRGB, cast(u32) SDL_PACKEDLAYOUT_8888, 24, 4);
     SDL_PIXELFORMAT_RGB888 :: SDL_PIXELFORMAT_XRGB8888;
-    SDL_PIXELFORMAT_RGBX8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_RGBX, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 24, 4);
-    SDL_PIXELFORMAT_XBGR8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_XBGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 24, 4);
+    SDL_PIXELFORMAT_RGBX8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_RGBX, cast(u32) SDL_PACKEDLAYOUT_8888, 24, 4);
+    SDL_PIXELFORMAT_XBGR8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_XBGR, cast(u32) SDL_PACKEDLAYOUT_8888, 24, 4);
     SDL_PIXELFORMAT_BGR888 :: SDL_PIXELFORMAT_XBGR8888;
-    SDL_PIXELFORMAT_BGRX8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_BGRX, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 24, 4);
-    SDL_PIXELFORMAT_ARGB8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ARGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 32, 4);
-    SDL_PIXELFORMAT_RGBA8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_RGBA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 32, 4);
-    SDL_PIXELFORMAT_ABGR8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_ArrayOrder.SDL_ARRAYORDER_ABGR, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 32, 4);
-    SDL_PIXELFORMAT_BGRA8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_BGRA, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_8888, 32, 4);
-    SDL_PIXELFORMAT_ARGB2101010 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PixelType.SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PackedOrder.SDL_PACKEDORDER_ARGB, cast(u32) SDL_PackedLayout.SDL_PACKEDLAYOUT_2101010, 32, 4);
+    SDL_PIXELFORMAT_BGRX8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_BGRX, cast(u32) SDL_PACKEDLAYOUT_8888, 24, 4);
+    SDL_PIXELFORMAT_ARGB8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_ARGB, cast(u32) SDL_PACKEDLAYOUT_8888, 32, 4);
+    SDL_PIXELFORMAT_RGBA8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_ARRAYORDER_RGBA, cast(u32) SDL_PACKEDLAYOUT_8888, 32, 4);
+    SDL_PIXELFORMAT_ABGR8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_ARRAYORDER_ABGR, cast(u32) SDL_PACKEDLAYOUT_8888, 32, 4);
+    SDL_PIXELFORMAT_BGRA8888 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_BGRA, cast(u32) SDL_PACKEDLAYOUT_8888, 32, 4);
+    SDL_PIXELFORMAT_ARGB2101010 :: #run SDL_DEFINE_PIXELFORMAT(cast(u32) SDL_PIXELTYPE_PACKED32, cast(u32) SDL_PACKEDORDER_ARGB, cast(u32) SDL_PACKEDLAYOUT_2101010, 32, 4);
 
     // Aliases for RGBA byte arrays of color data, for the current platform
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN {
@@ -263,8 +251,6 @@ SDL_PixelFormatEnum :: enum u32 {
 
 // Testing procedures
 test_pixels_pixel_formats :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_PIXELFORMAT values ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -275,8 +261,6 @@ test_pixels_pixel_formats :: () {
 }
 
 test_pixels_pixel_flag :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_PIXELFLAG ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -287,8 +271,6 @@ test_pixels_pixel_flag :: () {
 }
 
 test_pixels_pixel_type :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_PIXELTYPE ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -299,8 +281,6 @@ test_pixels_pixel_type :: () {
 }
 
 test_pixels_pixel_order :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_PIXELORDER ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -311,8 +291,6 @@ test_pixels_pixel_order :: () {
 }
 
 test_pixels_pixel_layout :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_PIXELLAYOUT ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -323,8 +301,6 @@ test_pixels_pixel_layout :: () {
 }
 
 test_pixels_bits_per_pixel :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_BITSPERPIXEL ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -335,8 +311,6 @@ test_pixels_bits_per_pixel :: () {
 }
 
 test_pixels_bytes_per_pixel :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_BYTESPERPIXEL ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -347,8 +321,6 @@ test_pixels_bytes_per_pixel :: () {
 }
 
 test_pixels_ispixelformat_indexed:: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_ISPIXELFORMAT_INDEXED ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -359,8 +331,6 @@ test_pixels_ispixelformat_indexed:: () {
 }
 
 test_pixels_ispixelformat_packed :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_ISPIXELFORMAT_PACKED ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -371,8 +341,6 @@ test_pixels_ispixelformat_packed :: () {
 }
 
 test_pixels_ispixelformat_array :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_ISPIXELFORMAT_ARRAY ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -383,8 +351,6 @@ test_pixels_ispixelformat_array :: () {
 }
 
 test_pixels_ispixelformat_alpha :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_ISPIXELFORMAT_ALPHA ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;
@@ -395,8 +361,6 @@ test_pixels_ispixelformat_alpha :: () {
 }
 
 test_pixels_ispixelformat_fourcc :: () {
-    using SDL_PixelFormatEnum;
-
     print("\n=== Test SDL_ISPIXELFORMAT_FOURCC ===\n");
 
     info := cast(*Type_Info_Enum) SDL_PixelFormatEnum;

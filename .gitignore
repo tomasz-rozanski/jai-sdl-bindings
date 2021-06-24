@@ -98,5 +98,6 @@ ed.bat
 output.dot
 *.exe
 test*.jai
-
-
+changes.md
+win/*.dll
+win/*.lib
