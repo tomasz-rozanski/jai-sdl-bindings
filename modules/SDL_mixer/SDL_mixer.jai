@@ -40,11 +40,9 @@ MIX_CHANNELS :: 8;
 
 // Good default values for a PC soundcard
 MIX_DEFAULT_FREQUENCY :: 22050;
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN {
-    MIX_DEFAULT_FORMAT :: AUDIO_S16LSB;
-} else {
-    MIX_DEFAULT_FORMAT :: AUDIO_S16MSB;
-}
+
+// Hard-code little-endian values for now
+MIX_DEFAULT_FORMAT :: AUDIO_S16LSB;
 
 MIX_DEFAULT_CHANNELS :: 2;
 MIX_MAX_VOLUME :: SDL_MIX_MAXVOLUME; // Volume of a chunk
@@ -83,13 +81,13 @@ using Mix_MusicType :: enum {
 Mix_Music :: struct {};
 
 // We'll use SDL for reporting errors
-Mix_SetError   :: SDL_SetError;
+//Mix_SetError   :: SDL_SetError; // @todo uncomment after implementing 'SDL_SetError'
 Mix_GetError   :: SDL_GetError;
 Mix_ClearError :: SDL_ClearError;
 
 Mix_Linked_Version :: () -> *SDL_version #foreign SDL2_MIXER;
 Mix_Init :: (flags: s32) -> s32 #foreign SDL2_MIXER;
-Mix_Quit :: ()  #foreign SDL2_MIXER;
+Mix_Quit :: () #foreign SDL2_MIXER;
 Mix_OpenAudio :: (frequency: s32, format: u16, channels: s32, chunksize: s32) -> s32 #foreign SDL2_MIXER;
 Mix_OpenAudioDevice :: (frequency: s32, format: u16, channels: s32, chunksize: s32, device: *u8, allowed_changes: s32) -> s32 #foreign SDL2_MIXER;
 Mix_AllocateChannels :: (numchans: s32) -> s32 #foreign SDL2_MIXER;
@@ -98,10 +96,10 @@ Mix_LoadWAV_RW :: (src: *SDL_RWops, freesrc: s32) -> *Mix_Chunk #foreign SDL2_MI
 Mix_LoadWAV :: (file: *SDL_RWops) {
     Mix_LoadWAV_RW(SDL_RWFromFile(file, "rb"), 1);
 }
-Mix_LoadMUS :: (file: *u8) -> *Mix_Music  #foreign SDL2_MIXER;
+Mix_LoadMUS :: (file: *u8) -> *Mix_Music #foreign SDL2_MIXER;
 Mix_LoadMUS_RW :: (src: *SDL_RWops, freesrc: s32) -> *Mix_Music #foreign SDL2_MIXER;
-Mix_LoadMUSType_RW :: (src: *SDL_RWops ,  type: Mix_MusicType, freesrc: s32) -> *Mix_Music  #foreign SDL2_MIXER;
-Mix_QuickLoad_WAV :: (mem: *u8) -> *Mix_Chunk  #foreign SDL2_MIXER;
+Mix_LoadMUSType_RW :: (src: *SDL_RWops, type: Mix_MusicType, freesrc: s32) -> *Mix_Music #foreign SDL2_MIXER;
+Mix_QuickLoad_WAV :: (mem: *u8) -> *Mix_Chunk #foreign SDL2_MIXER;
 Mix_QuickLoad_RAW :: (mem: *u8, len: u32) -> *Mix_Chunk #foreign SDL2_MIXER;
 Mix_FreeChunk :: (chunk: *Mix_Chunk) #foreign SDL2_MIXER;
 Mix_FreeMusic :: (music: *Mix_Music) #foreign SDL2_MIXER;
@@ -123,11 +121,11 @@ MIX_CHANNEL_POST :: -2;
 Mix_EffectFunc_t :: #type (chan: s32, stream: *void, len: s32, udata: *void) -> *void #c_call;
 Mix_EffectDone_t :: #type (chan: s32, udata: *void) -> *void #c_call;
 
-Mix_RegisterEffect :: (chan: s32, f: Mix_EffectFunc_t , d: Mix_EffectDone_t , arg: *void) -> s32 #foreign SDL2_MIXER;
+Mix_RegisterEffect :: (chan: s32, f: Mix_EffectFunc_t, d: Mix_EffectDone_t, arg: *void) -> s32 #foreign SDL2_MIXER;
 Mix_UnregisterEffect :: (channel: s32, f: Mix_EffectFunc_t ) -> s32 #foreign SDL2_MIXER;
 Mix_UnregisterAllEffects :: (channel: s32) -> s32 #foreign SDL2_MIXER;
 
-MIX_EFFECTSMAXSPEED  :: "MIX_EFFECTSMAXSPEED";
+MIX_EFFECTSMAXSPEED :: "MIX_EFFECTSMAXSPEED";
 
 Mix_SetPanning :: (channel: s32, left: u8, right: u8) -> s32 #foreign SDL2_MIXER;
 Mix_SetPosition :: (channel: s32, angle: s16, distance: u8) -> s32 #foreign SDL2_MIXER;
@@ -153,7 +151,7 @@ Mix_PlayChannel :: (channel: s32, chunk: *Mix_Chunk, loops: s32) -> s32 {
 }
 Mix_PlayMusic :: (music: *Mix_Music, loops: s32) -> s32 #foreign SDL2_MIXER;
 
-Mix_FadeInMusic :: (music: *Mix_Music , loops: s32, ms: s32) -> s32 #foreign SDL2_MIXER;
+Mix_FadeInMusic :: (music: *Mix_Music, loops: s32, ms: s32) -> s32 #foreign SDL2_MIXER;
 Mix_FadeInMusicPos :: (music: *Mix_Music, loops: s32, ms: s32, position: float64) -> s32 #foreign SDL2_MIXER;
 
 Mix_FadeInChannelTimed :: (channel: s32, chunk: *Mix_Chunk, loops: s32, ms: s32, ticks: s32) -> s32 #foreign SDL2_MIXER;
@@ -175,8 +173,8 @@ Mix_FadeOutChannel :: (which: s32, ms: s32) -> s32 #foreign SDL2_MIXER;
 Mix_FadeOutGroup :: (tag: s32, ms: s32) -> s32 #foreign SDL2_MIXER;
 Mix_FadeOutMusic :: (ms: s32) -> s32 #foreign SDL2_MIXER;
 
-Mix_FadingMusic :: () -> Mix_Fading  #foreign SDL2_MIXER;
-Mix_FadingChannel :: (which: s32) -> Mix_Fading  #foreign SDL2_MIXER;
+Mix_FadingMusic :: () -> Mix_Fading #foreign SDL2_MIXER;
+Mix_FadingChannel :: (which: s32) -> Mix_Fading #foreign SDL2_MIXER;
 
 Mix_Pause :: (channel: s32) #foreign SDL2_MIXER;
 Mix_Resume :: (channel: s32) #foreign SDL2_MIXER;
@@ -201,7 +199,7 @@ Mix_SetSoundFonts :: (paths: *u8) -> s32 #foreign SDL2_MIXER;
 Mix_GetSoundFonts :: () -> *u8 #foreign SDL2_MIXER;
 Mix_EachSoundFont :: (function: (*u8, *void) -> s32, data: *void) -> s32 #foreign SDL2_MIXER;
 
-Mix_GetChunk :: (channel: s32) -> *Mix_Chunk  #foreign SDL2_MIXER;
+Mix_GetChunk :: (channel: s32) -> *Mix_Chunk #foreign SDL2_MIXER;
 
 Mix_CloseAudio :: () #foreign SDL2_MIXER;
 

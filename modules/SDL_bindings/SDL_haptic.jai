@@ -377,7 +377,7 @@ test_haptic_rumble_play :: () {
                 }
             }
 
-            SDL_Delay(2_000);
+            SDL_Delay(200);
            // SDL_Delay(3_000); // let the whole rumble effect play
         }
     }
@@ -458,7 +458,7 @@ test_haptic_new_effect :: () {
 
             SDL_HapticRunEffect(controller_haptic, effect_id, 1);
 
-            SDL_Delay(2_000);
+            SDL_Delay(200);
 
             // @todo add tests for the rest of the effects with some nice default values
 
@@ -517,7 +517,7 @@ test_haptic_stuff :: () {
                 log("Device with index % is not opened", index);
             }
 
-            SDL_Delay(1_000);
+            SDL_Delay(200);
         } else {
             log("%1Warning: controller does not support haptics!%2", RED, NORMAL);
         }
