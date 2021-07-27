@@ -8,6 +8,7 @@ I also added the initial version of a few SDL addon libraries:
 - `SDL_image`
 - `SDL_mixer`
 - `SDL_ttf`
+
 Please, keep in mind, that I didn't test any of them yet.
 
 The current version of SDL2 is 2.0.14, but JAI compiler is shipped with fairly old version 2.0.7. To avoid compilation issues, replace files in the folder(s) `jai/modules/SDL/(win/linux/mac)` with the latest ones.
