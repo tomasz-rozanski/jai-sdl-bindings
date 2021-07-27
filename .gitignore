@@ -97,11 +97,18 @@ ed.bat
 .build/
 output.dot
 *.exe
+
+# testing source files
 test*.jai
+
+# misc
 changes.md
-win/*.dll
-win/*.lib
-linux/*.0.so.0
-linux/*
-linux/!readme.txt
+
+# libraries
+*.dll
+*.lib
+glfont
+*.0.so.0
+*.a
+*.so
 
