@@ -7,6 +7,7 @@
 #load "SDL_pixels.jai";
 #load "SDL_stdinc.jai";
 #load "SDL_surface.jai";
+#load "SDL_version.jai";
 
 // Ignore endiness for now
 //#module_parameters(LITTLE_ENDIAN := true);

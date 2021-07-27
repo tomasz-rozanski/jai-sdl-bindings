@@ -101,3 +101,7 @@ test*.jai
 changes.md
 win/*.dll
 win/*.lib
+linux/*.0.so.0
+linux/*
+linux/!readme.txt
+

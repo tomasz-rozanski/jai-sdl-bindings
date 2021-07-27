@@ -1,2 +1,4 @@
-Put "SDL2_mixer" library files here
+The following files goes here:
+SDL2_mixer.dll
+SDL2_mixer.lib
 

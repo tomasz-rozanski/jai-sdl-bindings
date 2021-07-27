@@ -1,2 +1,4 @@
-Put "SDL2_ttf" library files here
+The following files goes here:
+SDL2_ttf.dll
+SDL2_ttf.lib
 

@@ -4,5 +4,9 @@
 
 #load "SDL_ttf.jai";
 
-#if OS == .WINDOWS SDL2_TTF :: #foreign_library "win/SDL2_ttf";
+#if OS == .WINDOWS {
+    SDL2_TTF :: #foreign_library "win/SDL2_ttf";
+} else #if OS == .LINUX {
+    SDL2_TTF :: #foreign_library "linux/libSDL2_ttf";
+}
 

@@ -2,11 +2,13 @@
 #import "Math";
 #import "SDL";
 #import "SDL_bindings";
-#import "SDL_mixer";
+//#import "SDL_mixer";
 
 // Those two don't work at this moment. Don't know why, yet
 //#import "SDL_image";
-//#import "SDL_ttf";
+#import "SDL_ttf";
 
-main :: () {}
+main :: () {
+ //   IMG_Init(cast(s32) IMG_INIT_JPG);
+}
 

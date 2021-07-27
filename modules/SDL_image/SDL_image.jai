@@ -54,7 +54,7 @@ IMG_LoadTyped_RW :: (src: *SDL_RWops, freesrc: s32, type: *u8) -> *SDL_Surface #
 IMG_Load :: (file: *u8) -> *SDL_Surface #foreign SDL2_IMAGE;
 IMG_Load_RW :: (src: *SDL_RWops, freesrc: s32) -> *SDL_Surface #foreign SDL2_IMAGE;
 
-#if SDL_VERSION_ATLEAST(2, 0, 0) {
+#if #run SDL_VERSION_ATLEAST(2, 0, 0) {
 // Load an image directly into a render texture.
 IMG_LoadTexture :: (renderer: *SDL_Renderer, file: *u8) -> *SDL_Texture #foreign SDL2_IMAGE;
 IMG_LoadTexture_RW :: (renderer: *SDL_Renderer, src: *SDL_RWops, freesrc: s32) -> *SDL_Texture #foreign SDL2_IMAGE;
@@ -105,7 +105,7 @@ IMG_SaveJPG :: (surface: *SDL_Surface, file: *u8, quality: s32) -> s32 #foreign 
 IMG_SaveJPG_RW :: (surface: *SDL_Surface, dst: *SDL_RWops, freedst: s32, quality: s32) -> s32 #foreign SDL2_IMAGE;
 
 // We'll use SDL for reporting errors
-IMG_SetError :: SDL_SetError;
+// IMG_SetError :: SDL_SetError; // @not_implemented
 IMG_GetError :: SDL_GetError;
 
 // #include "close_code.h"
