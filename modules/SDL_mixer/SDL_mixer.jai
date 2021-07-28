@@ -93,8 +93,8 @@ Mix_OpenAudioDevice :: (frequency: s32, format: u16, channels: s32, chunksize: s
 Mix_AllocateChannels :: (numchans: s32) -> s32 #foreign SDL2_MIXER;
 Mix_QuerySpec :: (frequency: *s32, format: *u16, channels: *s32) -> s32 #foreign SDL2_MIXER;
 Mix_LoadWAV_RW :: (src: *SDL_RWops, freesrc: s32) -> *Mix_Chunk #foreign SDL2_MIXER;
-Mix_LoadWAV :: (file: *SDL_RWops) {
-    Mix_LoadWAV_RW(SDL_RWFromFile(file, "rb"), 1);
+Mix_LoadWAV :: (file: *u8) -> *Mix_Chunk {
+    return Mix_LoadWAV_RW(SDL_RWFromFile(file, "rb"), 1);
 }
 Mix_LoadMUS :: (file: *u8) -> *Mix_Music #foreign SDL2_MIXER;
 Mix_LoadMUS_RW :: (src: *SDL_RWops, freesrc: s32) -> *Mix_Music #foreign SDL2_MIXER;
