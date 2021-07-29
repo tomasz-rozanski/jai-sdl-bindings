@@ -5,6 +5,7 @@
 #load "SDL_error.jai";
 #load "SDL_haptic.jai";
 #load "SDL_pixels.jai";
+#load "SDL_rwops.jai";
 #load "SDL_stdinc.jai";
 #load "SDL_surface.jai";
 #load "SDL_version.jai";
