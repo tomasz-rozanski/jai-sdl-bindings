@@ -1,3 +1,5 @@
+// SDL_rwops.jai
+
 // RWops Types
 SDL_RWOPS_UNKNOWN   : u32 : 0;
 SDL_RWOPS_WINFILE   : u32 : 1;

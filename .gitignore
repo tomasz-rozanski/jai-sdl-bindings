@@ -88,6 +88,7 @@ bld/
 Generated\ Files/
 
 # Misc
+temp.md
 changes.md
 TODO.md
 .vimrc

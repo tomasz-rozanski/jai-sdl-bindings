@@ -1,4 +1,4 @@
-// SDL_stdinc.h
+// SDL_stdinc.jai
 
 SDL_reinterpret_cast :: ($T: Type, expression: $A) -> T { 
     result: T = cast,no_check(T) expression; 

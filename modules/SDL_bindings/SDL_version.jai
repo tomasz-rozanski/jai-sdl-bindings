@@ -1,3 +1,5 @@
+// SDL_version.jai
+
 // Macro to determine SDL version program was compiled against.
 //
 // This macro fills in a SDL_version structure with the version of the

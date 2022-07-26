@@ -1,4 +1,4 @@
-// SDL_audio.h
+// SDL_audio.jai
 
 SDL_AUDIOCVT_MAX_FILTERS :: 9;
 

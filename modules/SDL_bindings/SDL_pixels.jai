@@ -1,4 +1,4 @@
-// SDL_pixels.h
+// SDL_pixels.jai
 
 // Endianess 
 /*

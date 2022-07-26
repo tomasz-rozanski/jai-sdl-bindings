@@ -1,4 +1,4 @@
-// SDL_haptic.h
+// SDL_haptic.jai
 
 SDL_HAPTIC_CONSTANT     :: 0x0001;
 SDL_HAPTIC_SINE         :: 0x0002;
