@@ -1,11 +1,13 @@
 # Functions bindings checklist
 
 
-✔ - implemented
-❌ - not implemented
-🔵 - shipped with the compiler
+✔ - implemented  
+❌ - not implemented  
+🔵 - shipped with the compiler  
 
-[SDL2_image](#SDL2_image) | [SDL2_mixer](#SDL2_mixer) | [SDL2_ttf](#SDL2_ttf)
+[SDL2_image](#SDL2_image)  
+[SDL2_mixer](#SDL2_mixer)  
+[SDL2_ttf](#SDL2_ttf)  
 
 
 ## SDL2
@@ -122,6 +124,31 @@
 🔵 `SDL_FreeWAV`  
 🔵 `SDL_FlushEvent`  
 🔵 `SDL_FlushEvents`  
+🔵 `SDL_GameControllerAddMapping`  
+🔵 `SDL_GameControllerClose`  
+🔵 `SDL_GameControllerEventState`  
+🔵 `SDL_GameControllerFromInstanceID`  
+🔵 `SDL_GameControllerGetAttached`  
+🔵 `SDL_GameControllerGetAxis`  
+🔵 `SDL_GameControllerGetAxisFromString`  
+🔵 `SDL_GameControllerGetBindForAxis`  
+🔵 `SDL_GameControllerGetBindForButton`  
+🔵 `SDL_GameControllerGetButton`  
+🔵 `SDL_GameControllerGetButtonFromString`  
+🔵 `SDL_GameControllerGetJoystick`  
+🔵 `SDL_GameControllerGetProduct`  
+🔵 `SDL_GameControllerGetProductVersion`  
+🔵 `SDL_GameControllerGetStringForAxis`  
+🔵 `SDL_GameControllerGetStringForButton`  
+🔵 `SDL_GameControllerGetVendor`  
+🔵 `SDL_GameControllerMappingForIndex`  
+🔵 `SDL_GameControllerMappingForGUID`  
+🔵 `SDL_GameControllerMapping`  
+🔵 `SDL_GameControllerName`  
+🔵 `SDL_GameControllerNameForIndex`  
+🔵 `SDL_GameControllerNumMappings`  
+🔵 `SDL_GameControllerOpen`  
+🔵 `SDL_GameControllerUpdate`  
 🔵 `SDL_GetAudioDeviceName`  
 🔵 `SDL_GetAudioDeviceStatus`  
 🔵 `SDL_GetAudioDriver`  
@@ -197,31 +224,6 @@
 🔵 `SDL_GetWindowSurface`  
 🔵 `SDL_GetWindowTitle`  
 🔵 `SDL_GetWindowWMInfo`  
-🔵 `SDL_GameControllerAddMapping`  
-🔵 `SDL_GameControllerClose`  
-🔵 `SDL_GameControllerEventState`  
-🔵 `SDL_GameControllerFromInstanceID`  
-🔵 `SDL_GameControllerGetAttached`  
-🔵 `SDL_GameControllerGetAxis`  
-🔵 `SDL_GameControllerGetAxisFromString`  
-🔵 `SDL_GameControllerGetBindForAxis`  
-🔵 `SDL_GameControllerGetBindForButton`  
-🔵 `SDL_GameControllerGetButton`  
-🔵 `SDL_GameControllerGetButtonFromString`  
-🔵 `SDL_GameControllerGetJoystick`  
-🔵 `SDL_GameControllerGetProduct`  
-🔵 `SDL_GameControllerGetProductVersion`  
-🔵 `SDL_GameControllerGetStringForAxis`  
-🔵 `SDL_GameControllerGetStringForButton`  
-🔵 `SDL_GameControllerGetVendor`  
-🔵 `SDL_GameControllerMappingForIndex`  
-🔵 `SDL_GameControllerMappingForGUID`  
-🔵 `SDL_GameControllerMapping`  
-🔵 `SDL_GameControllerName`  
-🔵 `SDL_GameControllerNameForIndex`  
-🔵 `SDL_GameControllerNumMappings`  
-🔵 `SDL_GameControllerOpen`  
-🔵 `SDL_GameControllerUpdate`  
 🔵 `SDL_GL_BindTexture`  
 🔵 `SDL_GL_CreateContext`  
 🔵 `SDL_GL_DeleteContext`  

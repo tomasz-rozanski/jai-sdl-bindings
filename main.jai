@@ -6,5 +6,8 @@
 #import "SDL_image";
 #import "SDL_ttf";
 
-main :: () {}
+main :: () {
+    //test_pixels_module();
+    //test_haptic_module();
+}
 
