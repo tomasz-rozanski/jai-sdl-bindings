@@ -1,16 +1,16 @@
-# Functions bindings checklist
+# Implementation checklist (alphabetic order)
 
 
 ✔ - implemented  
 ❌ - not implemented  
 🔵 - shipped with the compiler  
 
-[SDL2_image](#SDL2_image)  
-[SDL2_mixer](#SDL2_mixer)  
-[SDL2_ttf](#SDL2_ttf)  
+[SDL_image](#SDL_image)  
+[SDL_mixer](#SDL_mixer)  
+[SDL_ttf](#SDL_ttf)  
 
 
-## SDL2
+## SDL
 
 ✔ `SDL_AllocRW`  
 ✔ `SDL_BlitSurface`  
@@ -790,7 +790,7 @@
 ❌ `SDL_WinRTRunApp`  
 
 
-## SDL2_image
+## SDL_image
 
 ✔ `IMG_Init`  
 ✔ `IMG_isICO`  
@@ -853,7 +853,7 @@
 ❌ `IMG_ReadXPMFromArrayToRGB888`  
 
 
-## SDL2_mixer
+## SDL_mixer
 
 ✔ `Mix_AllocateChannels`  
 ✔ `Mix_CloseAudio`  
@@ -952,7 +952,7 @@
 ❌ `Mix_SetTimidityCfg`  
 
 
-## SDL2_ttf
+## SDL_ttf
 
 ✔ `TTF_ByteSwappedUNICODE`  
 ✔ `TTF_CloseFont`  
@@ -969,73 +969,72 @@
 ✔ `TTF_GetFontOutline`  
 ✔ `TTF_GetFontHinting`  
 ✔ `TTF_GetFontKerning`  
+✔ `TTF_GetFontWrappedAlign`  
+✔ `TTF_GetFreeTypeVersion`  
+✔ `TTF_GetHarfBuzzVersion`  
 ✔ `TTF_GlyphIsProvided`  
+✔ `TTF_GlyphIsProvided32`  
 ✔ `TTF_GlyphMetrics`  
+✔ `TTF_GlyphMetrics32`  
 ✔ `TTF_Init`  
 ✔ `TTF_Linked_Version`  
+✔ `TTF_MeasureText`  
+✔ `TTF_MeasureUNICODE`  
+✔ `TTF_MeasureUTF8`  
 ✔ `TTF_OpenFont`  
+✔ `TTF_OpenFontDPI`  
+✔ `TTF_OpenFontDPIRW`  
 ✔ `TTF_OpenFontIndex`  
-✔ `TTF_OpenFontRW`  
+✔ `TTF_OpenFontIndexDPI`  
+✔ `TTF_OpenFontIndexDPIRW`  
 ✔ `TTF_OpenFontIndexRW`  
+✔ `TTF_OpenFontRW`  
 ✔ `TTF_Quit`  
-✔ `TTF_RenderText_Solid`  
-✔ `TTF_RenderUTF8_Solid`  
-✔ `TTF_RenderUNICODE_Solid`  
-✔ `TTF_RenderGlyph_Solid`  
-✔ `TTF_RenderText_Shaded`  
-✔ `TTF_RenderUTF8_Shaded`  
-✔ `TTF_RenderUNICODE_Shaded`  
-✔ `TTF_RenderGlyph_Shaded`  
-✔ `TTF_RenderText_Blended`  
-✔ `TTF_RenderUTF8_Blended`  
-✔ `TTF_RenderUNICODE_Blended`  
-✔ `TTF_RenderText_Blended_Wrapped`  
-✔ `TTF_RenderUTF8_Blended_Wrapped`  
-✔ `TTF_RenderUNICODE_Blended_Wrapped`  
 ✔ `TTF_RenderGlyph_Blended`  
-✔ `TTF_SetFontStyle`  
-✔ `TTF_SetFontOutline`  
+✔ `TTF_RenderGlyph_Solid`  
+✔ `TTF_RenderGlyph_LCD`  
+✔ `TTF_RenderGlyph_Shaded`  
+✔ `TTF_RenderGlyph32_Blended`  
+✔ `TTF_RenderGlyph32_LCD`  
+✔ `TTF_RenderGlyph32_Shaded`  
+✔ `TTF_RenderGlyph32_Solid`  
+✔ `TTF_RenderText_Blended`  
+✔ `TTF_RenderText_Blended_Wrapped`  
+✔ `TTF_RenderText_LCD`  
+✔ `TTF_RenderText_LCD_Wrapped`  
+✔ `TTF_RenderText_Shaded`  
+✔ `TTF_RenderText_Shaded_Wrapped`  
+✔ `TTF_RenderText_Solid`  
+✔ `TTF_RenderText_Solid_Wrapped`  
+✔ `TTF_RenderUNICODE_Blended`  
+✔ `TTF_RenderUNICODE_Blended_Wrapped`  
+✔ `TTF_RenderUNICODE_LCD`  
+✔ `TTF_RenderUNICODE_LCD_Wrapped`  
+✔ `TTF_RenderUNICODE_Shaded`  
+✔ `TTF_RenderUNICODE_Shaded_Wrapped`  
+✔ `TTF_RenderUNICODE_Solid`  
+✔ `TTF_RenderUNICODE_Solid_Wrapped`  
+✔ `TTF_RenderUTF8_Blended`  
+✔ `TTF_RenderUTF8_Blended_Wrapped`  
+✔ `TTF_RenderUTF8_LCD`  
+✔ `TTF_RenderUTF8_LCD_Wrapped`  
+✔ `TTF_RenderUTF8_Shaded`  
+✔ `TTF_RenderUTF8_Shaded_Wrapped`  
+✔ `TTF_RenderUTF8_Solid`  
+✔ `TTF_RenderUTF8_Solid_Wrapped`  
+✔ `TTF_SetDirection`  
+✔ `TTF_SetFontDirection`  
 ✔ `TTF_SetFontHinting`  
 ✔ `TTF_SetFontKerning`  
+✔ `TTF_SetFontOutline`  
+✔ `TTF_SetFontScriptName`  
+✔ `TTF_SetFontSize`  
+✔ `TTF_SetFontSizeDPI`  
+✔ `TTF_SetFontStyle`  
+✔ `TTF_SetFontWrappedAlign`  
+✔ `TTF_SetScript`  
 ✔ `TTF_SizeText`  
-✔ `TTF_SizeUTF8`  
 ✔ `TTF_SizeUNICODE`  
+✔ `TTF_SizeUTF8`  
 ✔ `TTF_WasInit`  
-  
-❌ `TTF_GetFontWrappedAlign`  
-❌ `TTF_GetFreeTypeVersion`  
-❌ `TTF_GetHarfBuzzVersion`  
-❌ `TTF_GlyphIsProvided32`  
-❌ `TTF_GlyphMetrics32`  
-❌ `TTF_MeasureText`  
-❌ `TTF_MeasureUNICODE`  
-❌ `TTF_MeasureUTF8`  
-❌ `TTF_OpenFontDPI`  
-❌ `TTF_OpenFontDPIRW`  
-❌ `TTF_OpenFontIndexDPI`  
-❌ `TTF_OpenFontIndexDPIRW`  
-❌ `TTF_RenderGlyph32_Blended`  
-❌ `TTF_RenderGlyph32_LCD`  
-❌ `TTF_RenderGlyph32_Shaded`  
-❌ `TTF_RenderGlyph32_Solid`  
-❌ `TTF_RenderGlyph_LCD`  
-❌ `TTF_RenderText_LCD`  
-❌ `TTF_RenderText_LCD_Wrapped`  
-❌ `TTF_RenderText_Shaded_Wrapped`  
-❌ `TTF_RenderText_Solid_Wrapped`  
-❌ `TTF_RenderUNICODE_LCD`  
-❌ `TTF_RenderUNICODE_LCD_Wrapped`  
-❌ `TTF_RenderUNICODE_Shaded_Wrapped`  
-❌ `TTF_RenderUNICODE_Solid_Wrapped`  
-❌ `TTF_RenderUTF8_LCD`  
-❌ `TTF_RenderUTF8_LCD_Wrapped`  
-❌ `TTF_RenderUTF8_Shaded_Wrapped`  
-❌ `TTF_RenderUTF8_Solid_Wrapped`  
-❌ `TTF_SetDirection`  
-❌ `TTF_SetFontDirection`  
-❌ `TTF_SetFontScriptName`  
-❌ `TTF_SetFontSize`  
-❌ `TTF_SetFontSizeDPI`  
-❌ `TTF_SetFontWrappedAlign`  
-❌ `TTF_SetScript`  
   
