@@ -102,9 +102,6 @@ output.dot
 # testing source files
 test*.jai
 
-# misc
-changes.md
-
 # libraries
 *.dll
 *.lib
@@ -113,3 +110,6 @@ glfont
 *.a
 *.so
 
+# c include files
+# *.h
+#
