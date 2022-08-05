@@ -967,7 +967,9 @@
 ✔ `TTF_GetFontHinting`  
 ✔ `TTF_GetFontKerning`  
 ✔ `TTF_GetFontKerningSizeGlyphs`  
+✔ `TTF_GetFontKerningSizeGlyphs32`  
 ✔ `TTF_GetFontOutline`  
+✔ `TTF_GetFontSDF`  
 ✔ `TTF_GetFontStyle`  
 ✔ `TTF_GetFontWrappedAlign`  
 ✔ `TTF_GetFreeTypeVersion`  
@@ -1028,6 +1030,7 @@
 ✔ `TTF_SetFontKerning`  
 ✔ `TTF_SetFontOutline`  
 ✔ `TTF_SetFontScriptName`  
+✔ `TTF_SetFontSDF`  
 ✔ `TTF_SetFontSize`  
 ✔ `TTF_SetFontSizeDPI`  
 ✔ `TTF_SetFontStyle`  

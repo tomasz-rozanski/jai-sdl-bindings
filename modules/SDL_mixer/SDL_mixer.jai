@@ -21,6 +21,8 @@ SDL_MIXER_VERSION_ATLEAST :: (X: s32, Y: s32, Z: s32) -> bool {
     return SDL_MIXER_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z);
 }
 
+Mix_Linked_Version :: () -> *SDL_version #foreign SDL2_MIXER;
+
 using MIX_InitFlags :: enum_flags s32 {
     MIX_INIT_FLAC   :: 0x00000001;
     MIX_INIT_MOD    :: 0x00000002;
@@ -31,7 +33,6 @@ using MIX_InitFlags :: enum_flags s32 {
 }
 
 MIX_CHANNELS :: 8;
-
 MIX_DEFAULT_FREQUENCY :: 22050;
 
 // Hard-code little-endian values for now
@@ -69,11 +70,6 @@ using Mix_MusicType :: enum {
 
 Mix_Music :: struct {};
 
-//Mix_SetError   :: SDL_SetError; // @todo uncomment after implementing 'SDL_SetError'
-Mix_GetError   :: SDL_GetError;
-Mix_ClearError :: SDL_ClearError;
-
-Mix_Linked_Version :: () -> *SDL_version #foreign SDL2_MIXER;
 Mix_Init :: (flags: s32) -> s32 #foreign SDL2_MIXER;
 Mix_Quit :: () #foreign SDL2_MIXER;
 Mix_OpenAudio :: (frequency: s32, format: u16, channels: s32, chunksize: s32) -> s32 #foreign SDL2_MIXER;
@@ -175,4 +171,8 @@ Mix_SetTimidityCfg :: (path: *u8) -> s32 #foreign SDL2_MIXER;
 Mix_GetTimidityCfg :: () -> *u8 #foreign SDL2_MIXER;
 Mix_GetChunk :: (channel: s32) -> *Mix_Chunk #foreign SDL2_MIXER;
 Mix_CloseAudio :: () #foreign SDL2_MIXER;
+
+Mix_SetError   :: SDL_SetError; 
+Mix_GetError   :: SDL_GetError;
+Mix_ClearError :: SDL_ClearError;
 
