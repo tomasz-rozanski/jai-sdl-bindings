@@ -13,6 +13,18 @@
 ## SDL
 
 ✔ `SDL_AllocRW`  
+✔ `SDL_AtomicAdd`  
+✔ `SDL_AtomicCAS`  
+✔ `SDL_AtomicCASPtr`  
+✔ `SDL_AtomicDecRef`  
+✔ `SDL_AtomicGet`  
+✔ `SDL_AtomicGetPtr`  
+✔ `SDL_AtomicIncRef`  
+✔ `SDL_AtomicLock`  
+✔ `SDL_AtomicSet`  
+✔ `SDL_AtomicSetPtr`  
+✔ `SDL_AtomicTryLock`  
+✔ `SDL_AtomicUnlock`  
 ✔ `SDL_BlitSurface`  
 ✔ `SDL_ConvertSurface`  
 ✔ `SDL_FreeRW`  
@@ -51,6 +63,8 @@
 ✔ `SDL_LoadWAV`  
 ✔ `SDL_MapRGB`  
 ✔ `SDL_MapRGBA`  
+✔ `SDL_MemoryBarrierAcquireFunction`  
+✔ `SDL_MemoryBarrierReleaseFunction`  
 ✔ `SDL_MouseIsHaptic`  
 ✔ `SDL_NumHaptics`  
 ✔ `SDL_ReadBE16`  
@@ -400,18 +414,6 @@
 ❌ `SDL_assert_paranoid`  
 ❌ `SDL_assert_release`  
 ❌ `SDL_assert`  
-❌ `SDL_AtomicAdd`  
-❌ `SDL_AtomicCAS`  
-❌ `SDL_AtomicCASPtr`  
-❌ `SDL_AtomicDecRef`  
-❌ `SDL_AtomicGet`  
-❌ `SDL_AtomicGetPtr`  
-❌ `SDL_AtomicIncRef`  
-❌ `SDL_AtomicLock`  
-❌ `SDL_AtomicSet`  
-❌ `SDL_AtomicSetPtr`  
-❌ `SDL_AtomicTryLock`  
-❌ `SDL_AtomicUnlock`  
 ❌ `SDL_BlitScaled`  
 ❌ `SDL_CalculateGammaRamp`  
 ❌ `SDL_ClearComposition`  

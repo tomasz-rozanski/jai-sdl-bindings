@@ -2,6 +2,7 @@
 #import "Basic";
 
 #load "SDL_audio.jai";
+#load "SDL_atomic.jai";
 #load "SDL_error.jai";
 #load "SDL_haptic.jai";
 #load "SDL_pixels.jai";
@@ -10,7 +11,7 @@
 #load "SDL_surface.jai";
 #load "SDL_version.jai";
 
-// Ignore endiness for now
+// Ignore endianness for now
 //#module_parameters(LITTLE_ENDIAN := true);
 
 // Some utilities for testing procedures.
